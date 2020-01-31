@@ -118,8 +118,13 @@
               "devServerTarget": "superbowl-grid:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "superbowl-grid"
 }
