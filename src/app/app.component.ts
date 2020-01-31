@@ -10,7 +10,7 @@ export class AppComponent  {
   //players = ['ATB', 'BLB', 'JNB']
 
 
-  name = 'Superbowl Grid Gen';
+  name = 'Superbowl Grid Generator';
   squaresFilled = 0;
   fillAttempts = 0;
   playerIndex = 0;
