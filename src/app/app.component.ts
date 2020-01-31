@@ -16,10 +16,11 @@ export class AppComponent  {
   playerIndex = 0;
   squares: any;
   players:  Array<Player> = [];
-  pickDelay = 100;
+  pickDelay = 25;
   isFilling = false;
   stopFilling = false;
   newPlayerName = "";
+  successMessage = "";
 
   constructor(){
     this.InitizlizeArray();
@@ -47,6 +48,7 @@ export class AppComponent  {
     this.InitizlizeArray();
     this.squaresFilled = 0;
     this.fillAttempts = 0;
+    this.successMessage = "";
 
     console.log("about to enter loop...");
     for (var i = 0; i < 100000; i++)
@@ -59,6 +61,7 @@ export class AppComponent  {
       if(this.squaresFilled == 100 || this.stopFilling) {
         this.isFilling = false;
         this.stopFilling = false;
+        this.successMessage = "All Done! Now you can print out your grid!"
         break;
       }
     }
