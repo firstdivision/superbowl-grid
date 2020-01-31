@@ -24,4 +24,4 @@ jobs:
     - name: Deploy
       env:
         GH_TOKEN : ${{ secrets.GH_TOKEN }} 
-      run: ng deploy
+      run: ng deploy --no-silent --base-href=/superbowl-grid/
