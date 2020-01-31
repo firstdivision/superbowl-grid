@@ -1,109 +1,116 @@
-<h1>{{ name }}</h1>
+<div style="margin : 20px">
+  <h1>{{ name }}</h1>
 
 
-<div class="no-print">
-  <div class="row">
-    <div class="col-md-6">
+  <div class="no-print">
+    <div class="row">
+      <div class="col-md-6">
 
-    <div class="card">
-      <div class="card-header">
-        Players
-      </div>
-      <div class="card-body">
-        <div *ngFor="let player of players; index as i">
-          <div>
-            <button class="btn btn-primary btn-sm" (click)="RemovePlayer(i)" [disabled]="isFilling">Remove</button>
-            {{ player.name }} : {{  player.spots }} squares taken
-          </div>
-        </div>
-        <div *ngIf="!players || players.length < 2">
-          <span class="text-danger">You must add players before generating a grid!</span>
-        </div>
-      </div>
-    </div>
-
-
-    </div>
-
-    <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          Add Player
+          Players
         </div>
         <div class="card-body">
-            <input [(ngModel)]="newPlayerName" (keyup.enter)="AddPlayer()" placeholder="Name" class="form-control" />
-            <button class="btn btn-primary btn-sm" (click)="AddPlayer()" [disabled]="isFilling">Add</button>
+          <div *ngFor="let player of players; index as i">
+            <div>
+              <button class="btn btn-primary btn-sm" (click)="RemovePlayer(i)" [disabled]="isFilling">Remove</button>
+              {{ player.name }} : {{  player.spots }} squares taken
+            </div>
+          </div>
+          <div *ngIf="!players || players.length < 2">
+            <span class="text-danger">You must add at least two players before generating a grid!</span>
+          </div>
+        </div>
+      </div>
+
+
+      </div>
+
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            Add Player
+          </div>
+          <div class="card-body">
+              <input [(ngModel)]="newPlayerName" (keyup.enter)="AddPlayer()" placeholder="Name" class="form-control" />
+              <button class="btn btn-primary btn-sm" (click)="AddPlayer()" [disabled]="isFilling">Add</button>
+          </div>
         </div>
       </div>
     </div>
+
+
+      <br>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" href="javascript:void(0);" (click)="FillSquares()" [disabled]="(!players || players.length < 2 || isFilling)">
+        Fill Random Squares
+      </button> 
+
+      <button class="btn btn-primary" href="javascript:void(0);" (click)="stopFilling = true" [disabled]="!isFilling">
+        Stop
+      </button>
+    </div>
+
+    <span class="text-success">{{ successMessage }}</span>
+
+    <br><br>
   </div>
 
+  <table class="table table-striped table-bordered">
 
-    <br>
 
-  <div class="btn-group">
-    <button class="btn btn-primary" href="javascript:void(0);" (click)="FillSquares()" [disabled]="(!players || players.length < 2 || isFilling)">
-      Fill Random Squares
-    </button> 
+    <tr> 
+      <th colspan="2" rowspan="2">&nbsp;</th>
+      <th colspan="10" class="text-center">
+        <img src="assets/49s.png" />
+      </th>
+    </tr>
 
-    <button class="btn btn-primary" href="javascript:void(0);" (click)="stopFilling = true" [disabled]="!isFilling">
-      Stop
-    </button>
-  </div>
+    <tr>
+      <th class="text-center bg-secondary text-light">0</th>
+      <th class="text-center bg-secondary text-light">1</th>
+      <th class="text-center bg-secondary text-light">2</th>
+      <th class="text-center bg-secondary text-light">3</th>
+      <th class="text-center bg-secondary text-light">4</th>
+      <th class="text-center bg-secondary text-light">5</th>
+      <th class="text-center bg-secondary text-light">6</th>
+      <th class="text-center bg-secondary text-light">7</th>
+      <th class="text-center bg-secondary text-light">8</th>
+      <th class="text-center bg-secondary text-light">9</th>
+    </tr>
 
-  <span class="text-success">{{ successMessage }}</span>
+    <tr>
+      <td rowspan="11" class="vertical-center" style="width: 1em;">
+        <img src="assets/ks.png" />
+      </td>
+    </tr>
 
-  <br><br>
-</div>
+    <tr *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
+      <td class="text-center bg-secondary text-light" height="30"><strong>{{ i }}</strong></td>
+      <td class="text-center" *ngFor="let j of [0,1,2,3,4,5,6,7,8,9]">
+        {{ (squares[i])[j] }}
+      </td>
+    </tr>
+  </table>
 
-<table class="table table-striped table-bordered">
-  <tr>
-    <td rowspan="13" class="vertical-center" style="width: 1em;">
-      <img src="assets/ks.png" />
-    </td>
-  </tr>
+  <div class="no-print">
+      <div>
+      Squares Filled: {{ squaresFilled }}
+    </div>
 
-  <tr>
-    <th colspan="11" class="text-center">
-      <img src="assets/49s.png" />
-    </th>
-  </tr>
-  <tr>
-    <th></th>
-    <th class="text-center bg-secondary text-light">0</th>
-    <th class="text-center bg-secondary text-light">1</th>
-    <th class="text-center bg-secondary text-light">2</th>
-    <th class="text-center bg-secondary text-light">3</th>
-    <th class="text-center bg-secondary text-light">4</th>
-    <th class="text-center bg-secondary text-light">5</th>
-    <th class="text-center bg-secondary text-light">6</th>
-    <th class="text-center bg-secondary text-light">7</th>
-    <th class="text-center bg-secondary text-light">8</th>
-    <th class="text-center bg-secondary text-light">9</th>
-  </tr>
-  <tr *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
-    <td class="text-center bg-secondary text-light" height="30"><strong>{{ i }}</strong></td>
-    <td class="text-center" *ngFor="let j of [0,1,2,3,4,5,6,7,8,9]">
-      {{ (squares[i])[j] }}
-    </td>
-  </tr>
-</table>
-
-<div class="no-print">
     <div>
-    Squares Filled: {{ squaresFilled }}
+      Fill Attempts: {{ fillAttempts }}
+    </div>
+
+      <br>
+
+    <label>Pick Delay (milliseconds, more is slower):
+      <input [(ngModel)]="pickDelay" placeholder="name"/>
+    </label>
   </div>
-
-  <div>
-    Fill Attempts: {{ fillAttempts }}
-  </div>
-
-    <br>
-
-  <label>Pick Delay (milliseconds, more is slower):
-    <input [(ngModel)]="pickDelay" placeholder="name"/>
-  </label>
 </div>
+
 
 
 
