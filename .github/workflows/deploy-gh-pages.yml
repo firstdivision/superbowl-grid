@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.8
+    - name: Install angular CLI
+      run: npm install -g @angular/cli
     - name: Install dependencies
       run: npm install
     - name: Deploy
