@@ -1,0 +1,28 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12.8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.8
+    - name: Install angular CLI
+      run: npm install -g @angular/cli
+    - name: Install dependencies
+      run: npm install
+    - name: Deploy
+      env:
+        CI: true
+        GH_TOKEN : ${{ secrets.GH_TOKEN }}
+      run: ng deploy --no-silent --base-href=/superbowl-grid/ --name="firstdivision" --email=realkillfly@gmail.com
