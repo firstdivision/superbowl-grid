@@ -22,4 +22,6 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Deploy
+      env:
+        GH_TOKEN : GITHUB_TOKEN 
       run: ng deploy
