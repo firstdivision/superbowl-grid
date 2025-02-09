@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule  } from '@angular/common'
 
 @Component({
   selector: 'app-root',
+  imports: [RouterOutlet, FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrl: './app.component.css'
 })
-
-export class AppComponent  {
-  //players = ['ATB', 'BLB', 'JNB']
-
-
+export class AppComponent {
+  title = 'superbowl-grid';
   name = 'Superbowl Grid Generator';
   squaresFilled = 0;
   fillAttempts = 0;
@@ -27,20 +28,11 @@ export class AppComponent  {
   }
 
   InitizlizeArray(){
-     var rows = 10
-     var cols = 10
-     this.squares = Array.from({ length: rows }, () => 
-      Array.from({ length: cols }, () => "")
-    );
-
-/*
-    this.players = [
-    {name: "ATB", spots: 0},
-    {name: "BLB", spots: 0},
-    {name: "JNB", spots: 0},
-    ];
-*/
-    this.playerIndex = Math.floor(Math.random() * 3);
+    var rows = 10
+    var cols = 10
+    this.squares = Array.from({ length: rows }, () => 
+     Array.from({ length: cols }, () => "")
+   );
   }
 
   async FillSquares(){
@@ -100,7 +92,7 @@ export class AppComponent  {
     }  
   }
 
-  RemovePlayer(index){
+  RemovePlayer(index: number){
     this.players.splice(index, 1);
   }
 
@@ -121,6 +113,7 @@ export class AppComponent  {
   }
 
 }
+
 
 export class Player{
   name = "";
